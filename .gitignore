@@ -1,41 +1,32 @@
-# Compiled Lua sources
-luac.out
+game.Players.LocalPlayer.Name = "VHub"
+getgenv().name = "Pornhub"
 
-# luarocks build files
-*.src.rock
-*.zip
-*.tar.gz
+local Plr = game.Players.LocalPlayer
+for Index, Value in next, game:GetDescendants() do 
+    if Value.ClassName == "TextLabel" then 
+        local has = string.find(Value.Text,Plr.Name) 
+        if has then 
+            local str = Value.Text:gsub(Plr.Name,name)
+            Value.Text = str 
+        end
+        Value:GetPropertyChangedSignal("Text"):Connect(function()
+            local str = Value.Text:gsub(Plr.Name,name)
+            Value.Text = str 
+        end)
+    end
+end
 
-# Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-*.def
-*.exp
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
+game.DescendantAdded:Connect(function(Value)
+    if Value.ClassName == "TextLabel" then 
+        local has = string.find(Value.Text,Plr.Name)
+        Value:GetPropertyChangedSignal("Text"):Connect(function()
+            local str = Value.Text:gsub(Plr.Name,name)
+            Value.Text = str 
+        end)
+        if has then 
+            local str = Value.Text:gsub(Plr.Name,name)
+            Value.Text = str 
+        end
+        
+    end
+end)
